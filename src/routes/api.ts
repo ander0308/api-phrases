@@ -16,4 +16,6 @@ router.get('/frases', ApiController.listPhrases)
 
 router.get('/frase/:id', ApiController.getPhrase)
 
+router.put('/frase/:id', ApiController.updatePhrase)
+
 export default router
