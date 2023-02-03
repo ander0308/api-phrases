@@ -75,3 +75,9 @@ export const randomPhrase = async (req: Request, res: Response) => {
         res.json({ error: 'Nao há frases cadastrada'})
     }
 }
+
+export const uploadFile = async (req: Request, res: Response) => {
+    console.log('FILE', req.file)
+    console.log('FILES', req.files)
+    res.json({ mensage: 'upload sucess!'})
+}
