@@ -1,3 +1,4 @@
+import { unlink } from 'fs/promises'
 import { Request, Response } from 'express'
 import { Sequelize } from 'sequelize'
 import sharp from 'sharp'
@@ -79,11 +80,16 @@ export const randomPhrase = async (req: Request, res: Response) => {
 
 export const uploadFile = async (req: Request, res: Response) => {
     if(req.file) {
+        const filename = `${req.file.filename}.jpg`
+
         await sharp(req.file.path)
             .resize(400, 400, /*{ fit: sharp.fit.cover }*/) // pode maniputar os tamanhos *cover já é o padrão
             .toFormat('jpeg')
-            .toFile(`./public/media/${req.file.filename}.jpg`)
-        res.json({ image: `${req.file.filename}.jpg`})
+            .toFile(`./public/media/${filename}`)
+
+        await unlink(req.file.path) // essa função exlui a imagem da pasta temp
+
+        res.json({ image: `${filename}`})
     } else {
         res.status(400)
         res.json({ error: 'Arquivo inválido.' })

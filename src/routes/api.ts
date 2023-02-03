@@ -27,7 +27,7 @@ const upload = multer({
         }
         // callback(null, allowed.includes(file.mimetype)) // também posso fazer assim, pois o retorno da função já é true ou false.
     },
-    limits: { fieldSize: 2000000 } // limita tamanho do arquivo
+    limits: { fieldSize: 3000000 } // limita tamanho do arquivo
     // storage: storageConfig  (Função declarada acima)
 })
 
